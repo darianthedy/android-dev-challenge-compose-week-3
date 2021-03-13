@@ -52,7 +52,7 @@ class MainActivity : AppCompatActivity() {
 private fun MyApp(themes: List<ThemeItem>, gardens: List<GardenItem>) {
     val navController = rememberNavController()
 
-    NavHost(navController = navController, startDestination = NAV_HOME) {
+    NavHost(navController = navController, startDestination = NAV_WELCOME_SCREEN) {
         composable(NAV_WELCOME_SCREEN) { WelcomeScreen { toLogInPage(navController) } }
         composable(NAV_LOG_IN_SCREEN) { LogInScreen { toHomePage(navController) } }
         composable(NAV_HOME) { HomeScreen(themes, gardens) }
