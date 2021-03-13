@@ -21,11 +21,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.androiddevchallenge.ui.theme.MyTheme
 import com.example.androiddevchallenge.ui.theme.pink900
 import com.example.androiddevchallenge.ui.theme.white
+import com.example.androiddevchallenge.ui.widget.SimpleButton
 
 private class WelcomeScreenRes(
     @DrawableRes val logo: Int,
@@ -80,7 +82,9 @@ private fun Content(
         modifier = Modifier.fillMaxSize()
     ) {
         WelcomeImage(
-            Modifier.padding(top = 64.dp, start = 88.dp, bottom = 48.dp).align(Alignment.End),
+            Modifier
+                .padding(top = 64.dp, start = 88.dp, bottom = 48.dp)
+                .align(Alignment.End),
             welcomeScreenRes
         )
 
@@ -131,7 +135,7 @@ private fun LogoText(
     Image(
         modifier = modifier,
         painter = painterResource(id = welcomeScreenRes.logo),
-        contentDescription = "Bloom",
+        contentDescription = stringResource(id = R.string.welcome_logo_content_description),
     )
 }
 
@@ -141,7 +145,7 @@ private fun SubtitleText(
 ) {
     Text(
         modifier = modifier,
-        text = "Beautiful home garden solutions",
+        text = stringResource(id = R.string.welcome_subtitle_text),
         style = MaterialTheme.typography.subtitle1,
         color = MaterialTheme.colors.onPrimary,
     )
@@ -149,22 +153,11 @@ private fun SubtitleText(
 
 @Composable
 private fun CreateAccountButton() {
-    Button(
-        modifier = Modifier
-            .padding(start = 16.dp, end = 16.dp, bottom = 8.dp)
-            .height(48.dp)
-            .fillMaxWidth(),
-        shape = MaterialTheme.shapes.medium,
-        colors = ButtonDefaults.buttonColors(
-            backgroundColor = MaterialTheme.colors.secondary,
-        ),
+    SimpleButton(
+        modifier = Modifier.padding(start = 16.dp, end = 16.dp, bottom = 8.dp),
+        text = stringResource(id = R.string.welcome_subtitle_create_account_text),
         onClick = { }
-    ) {
-        Text(
-            "Create account",
-            style = MaterialTheme.typography.button,
-        )
-    }
+    )
 }
 
 @Composable
@@ -174,8 +167,8 @@ private fun LogInText(
     onLogInClick: () -> Unit,
 ) {
     Text(
-        modifier = modifier.clickable { onLogInClick() },
-        text = "Log in",
+        modifier = modifier.clickable(onClick = onLogInClick),
+        text = stringResource(id = R.string.log_in),
         style = MaterialTheme.typography.button,
         color = welcomeScreenRes.logInColor,
     )
