@@ -2,6 +2,7 @@ package com.example.androiddevchallenge
 
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -35,12 +36,12 @@ private class WelcomeScreenRes(
 )
 
 @Composable
-fun WelcomeScreen() {
+fun WelcomeScreen(onLogInClick: () -> Unit) {
     val welcomeScreenRes = getWelcomeScreenRes()
 
     Surface(color = MaterialTheme.colors.primary) {
         BackgroundImage(welcomeScreenRes)
-        Content(welcomeScreenRes)
+        Content(welcomeScreenRes, onLogInClick)
     }
 }
 
@@ -72,7 +73,10 @@ private fun BackgroundImage(welcomeScreenRes: WelcomeScreenRes) {
 }
 
 @Composable
-private fun Content(welcomeScreenRes: WelcomeScreenRes) {
+private fun Content(
+    welcomeScreenRes: WelcomeScreenRes,
+    onLogInClick: () -> Unit,
+) {
     Column(
         modifier = Modifier.fillMaxSize()
     ) {
@@ -101,6 +105,7 @@ private fun Content(welcomeScreenRes: WelcomeScreenRes) {
         LogInText(
             modifier = Modifier.align(Alignment.CenterHorizontally),
             welcomeScreenRes = welcomeScreenRes,
+            onLogInClick = onLogInClick,
         )
     }
 }
@@ -111,7 +116,7 @@ private fun WelcomeImage(
     welcomeScreenRes: WelcomeScreenRes
 ) {
     Image(
-        modifier = modifier.width(272.dp).height(280.dp),
+        modifier = modifier.height(280.dp),
         painter = painterResource(id = welcomeScreenRes.welcomeIllos),
         contentDescription = null,
         contentScale = ContentScale.None,
@@ -167,9 +172,10 @@ private fun CreateAccountButton() {
 private fun LogInText(
     modifier: Modifier = Modifier,
     welcomeScreenRes: WelcomeScreenRes,
+    onLogInClick: () -> Unit,
 ) {
     Text(
-        modifier = modifier,
+        modifier = modifier.clickable { onLogInClick() },
         text = "Log in",
         style = MaterialTheme.typography.button,
         color = welcomeScreenRes.logInColor,
@@ -180,7 +186,7 @@ private fun LogInText(
 @Composable
 fun WelcomeScreenLightPreview() {
     MyTheme {
-        WelcomeScreen()
+        WelcomeScreen { }
     }
 }
 
@@ -188,6 +194,6 @@ fun WelcomeScreenLightPreview() {
 @Composable
 fun WelcomeScreenDarkPreview() {
     MyTheme(darkTheme = true) {
-        WelcomeScreen()
+        WelcomeScreen { }
     }
 }
