@@ -19,11 +19,13 @@ import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.toArgb
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.navigate
+import androidx.navigation.compose.rememberNavController
 import com.example.androiddevchallenge.ui.theme.MyTheme
 
 class MainActivity : AppCompatActivity() {
@@ -34,32 +36,27 @@ class MainActivity : AppCompatActivity() {
                 window.statusBarColor = MaterialTheme.colors.background.toArgb()
                 window.navigationBarColor = MaterialTheme.colors.background.toArgb()
 
-                WelcomeScreen()
+                MyApp()
             }
         }
     }
 }
 
-// Start building your app here!
-//@Composable
-//fun WelcomeScreen() {
-//    Surface(color = MaterialTheme.colors.background) {
-//        Text(text = "Ready... Set... GO!", style = MaterialTheme.typography.body2)
-//    }
-//}
-//
-//@Preview("Light Theme", widthDp = 360, heightDp = 640)
-//@Composable
-//fun LightPreview() {
-//    MyTheme {
-//        WelcomeScreen()
-//    }
-//}
-//
-//@Preview("Dark Theme", widthDp = 360, heightDp = 640)
-//@Composable
-//fun DarkPreview() {
-//    MyTheme(darkTheme = true) {
-//        WelcomeScreen()
-//    }
-//}
+@Composable
+private fun MyApp() {
+    val navController = rememberNavController()
+
+    NavHost(navController = navController, startDestination = NAV_WELCOME_SCREEN) {
+        composable(NAV_WELCOME_SCREEN) { WelcomeScreen { toLogInPage(navController) } }
+        composable(NAV_LOG_IN_SCREEN) { LogInScreen { toHomePage(navController) } }
+        composable(NAV_HOME) { }
+    }
+}
+
+private fun toLogInPage(navController: NavController) {
+    navController.navigate(NAV_LOG_IN_SCREEN)
+}
+
+private fun toHomePage(navController: NavController) {
+    navController.navigate(NAV_HOME)
+}
