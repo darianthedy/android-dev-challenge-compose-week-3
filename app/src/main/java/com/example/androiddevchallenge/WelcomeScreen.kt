@@ -77,7 +77,7 @@ private fun Content(welcomeScreenRes: WelcomeScreenRes) {
         modifier = Modifier.fillMaxSize()
     ) {
         WelcomeImage(
-            Modifier.padding(top = 64.dp, start = 88.dp, bottom = 48.dp),
+            Modifier.padding(top = 64.dp, start = 88.dp, bottom = 48.dp).align(Alignment.End),
             welcomeScreenRes
         )
 
@@ -111,10 +111,11 @@ private fun WelcomeImage(
     welcomeScreenRes: WelcomeScreenRes
 ) {
     Image(
-        modifier = modifier.width(310.dp).height(280.dp),
+        modifier = modifier.width(272.dp).height(280.dp),
         painter = painterResource(id = welcomeScreenRes.welcomeIllos),
         contentDescription = null,
         contentScale = ContentScale.None,
+        alignment = Alignment.TopStart,
     )
 }
 
