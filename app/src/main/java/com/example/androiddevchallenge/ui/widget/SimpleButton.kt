@@ -1,5 +1,6 @@
 package com.example.androiddevchallenge.ui.widget
 
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.material.Button
@@ -39,7 +40,9 @@ fun SimpleButton(
 fun SimpleButtonLightPreview() {
     MyTheme {
         Surface(color = MaterialTheme.colors.background) {
-            SimpleButton(text = "Test button", onClick = { })
+            Column {
+                SimpleButton(text = "Test button", onClick = { })
+            }
         }
     }
 }
@@ -49,7 +52,9 @@ fun SimpleButtonLightPreview() {
 fun SimpleButtonDarkPreview() {
     MyTheme(darkTheme = true) {
         Surface(color = MaterialTheme.colors.background) {
-            SimpleButton(text = "Test button", onClick = { })
+            Column {
+                SimpleButton(text = "Test button", onClick = { })
+            }
         }
     }
 }

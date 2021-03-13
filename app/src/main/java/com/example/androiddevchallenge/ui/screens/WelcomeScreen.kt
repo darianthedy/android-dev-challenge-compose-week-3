@@ -1,4 +1,4 @@
-package com.example.androiddevchallenge
+package com.example.androiddevchallenge.ui.screens
 
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
@@ -7,11 +7,8 @@ import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.Button
-import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
@@ -24,6 +21,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.androiddevchallenge.R
 import com.example.androiddevchallenge.ui.theme.MyTheme
 import com.example.androiddevchallenge.ui.theme.pink900
 import com.example.androiddevchallenge.ui.theme.white
@@ -40,7 +38,10 @@ private class WelcomeScreenRes(
 fun WelcomeScreen(onLogInClick: () -> Unit) {
     val welcomeScreenRes = getWelcomeScreenRes()
 
-    Surface(color = MaterialTheme.colors.primary) {
+    Surface(
+        modifier = Modifier.fillMaxSize(),
+        color = MaterialTheme.colors.primary
+    ) {
         BackgroundImage(welcomeScreenRes)
         Content(welcomeScreenRes, onLogInClick)
     }
@@ -68,7 +69,7 @@ private fun getWelcomeScreenRes(): WelcomeScreenRes =
 private fun BackgroundImage(welcomeScreenRes: WelcomeScreenRes) {
     Image(
         modifier = Modifier.fillMaxSize(),
-        painter = painterResource(id = welcomeScreenRes.welcomeBg),
+        painter = painterResource(welcomeScreenRes.welcomeBg),
         contentDescription = null,
     )
 }
@@ -120,7 +121,7 @@ private fun WelcomeImage(
 ) {
     Image(
         modifier = modifier.height(280.dp),
-        painter = painterResource(id = welcomeScreenRes.welcomeIllos),
+        painter = painterResource(welcomeScreenRes.welcomeIllos),
         contentDescription = null,
         contentScale = ContentScale.None,
         alignment = Alignment.TopStart,
@@ -134,8 +135,8 @@ private fun LogoText(
 ) {
     Image(
         modifier = modifier,
-        painter = painterResource(id = welcomeScreenRes.logo),
-        contentDescription = stringResource(id = R.string.welcome_logo_content_description),
+        painter = painterResource(welcomeScreenRes.logo),
+        contentDescription = stringResource(R.string.welcome_logo_content_description),
     )
 }
 
@@ -145,7 +146,7 @@ private fun SubtitleText(
 ) {
     Text(
         modifier = modifier,
-        text = stringResource(id = R.string.welcome_subtitle_text),
+        text = stringResource(R.string.welcome_subtitle_text),
         style = MaterialTheme.typography.subtitle1,
         color = MaterialTheme.colors.onPrimary,
     )
@@ -155,7 +156,7 @@ private fun SubtitleText(
 private fun CreateAccountButton() {
     SimpleButton(
         modifier = Modifier.padding(start = 16.dp, end = 16.dp, bottom = 8.dp),
-        text = stringResource(id = R.string.welcome_subtitle_create_account_text),
+        text = stringResource(R.string.welcome_subtitle_create_account_text),
         onClick = { }
     )
 }
@@ -168,7 +169,7 @@ private fun LogInText(
 ) {
     Text(
         modifier = modifier.clickable(onClick = onLogInClick),
-        text = stringResource(id = R.string.log_in),
+        text = stringResource(R.string.log_in),
         style = MaterialTheme.typography.button,
         color = welcomeScreenRes.logInColor,
     )

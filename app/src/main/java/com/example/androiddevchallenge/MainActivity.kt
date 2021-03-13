@@ -27,6 +27,9 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigate
 import androidx.navigation.compose.rememberNavController
+import com.example.androiddevchallenge.ui.screens.HomeScreen
+import com.example.androiddevchallenge.ui.screens.LogInScreen
+import com.example.androiddevchallenge.ui.screens.WelcomeScreen
 import com.example.androiddevchallenge.ui.theme.MyTheme
 
 @ExperimentalComposeUiApi
@@ -38,7 +41,7 @@ class MainActivity : AppCompatActivity() {
                 window.statusBarColor = MaterialTheme.colors.background.toArgb()
                 window.navigationBarColor = MaterialTheme.colors.background.toArgb()
 
-                MyApp()
+                MyApp(themes, gardens)
             }
         }
     }
@@ -46,13 +49,13 @@ class MainActivity : AppCompatActivity() {
 
 @ExperimentalComposeUiApi
 @Composable
-private fun MyApp() {
+private fun MyApp(themes: List<ThemeItem>, gardens: List<GardenItem>) {
     val navController = rememberNavController()
 
-    NavHost(navController = navController, startDestination = NAV_WELCOME_SCREEN) {
+    NavHost(navController = navController, startDestination = NAV_HOME) {
         composable(NAV_WELCOME_SCREEN) { WelcomeScreen { toLogInPage(navController) } }
         composable(NAV_LOG_IN_SCREEN) { LogInScreen { toHomePage(navController) } }
-        composable(NAV_HOME) { }
+        composable(NAV_HOME) { HomeScreen(themes, gardens) }
     }
 }
 

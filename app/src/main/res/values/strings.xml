@@ -14,6 +14,11 @@
     <string name="log_in">Log in</string>
     <string name="terms_of_use">Terms of Use</string>
     <string name="privacy_policy">Privacy Policy</string>
+    <string name="search">Search</string>
+    <string name="home">Home</string>
+    <string name="favorites">Favorites</string>
+    <string name="profile">Profile</string>
+    <string name="cart">Cart</string>
 
     <string name="welcome_logo_content_description">Bloom</string>
     <string name="welcome_subtitle_text">Beautiful home garden solutions</string>
@@ -23,4 +28,7 @@
     <string name="log_in_email_hint">Email Address</string>
     <string name="log_in_password_hint">Password (8+ characters)</string>
     <string name="log_in_terms_of_use_text">By clicking below, you agree to our Terms of Use and consent to our Privacy Policy.</string>
+
+    <string name="home_browse_themes_title">Browse themes</string>
+    <string name="home_design_garden_title">Design your home garden</string>
 </resources>

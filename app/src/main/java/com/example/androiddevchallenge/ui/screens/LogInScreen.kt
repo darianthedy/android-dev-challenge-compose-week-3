@@ -1,4 +1,4 @@
-package com.example.androiddevchallenge
+package com.example.androiddevchallenge.ui.screens
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -36,39 +36,51 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.androiddevchallenge.R
 import com.example.androiddevchallenge.ui.theme.MyTheme
 import com.example.androiddevchallenge.ui.widget.SimpleButton
 
 @ExperimentalComposeUiApi
 @Composable
 fun LogInScreen(onLogInClick: () -> Unit) {
+    Surface(
+        modifier = Modifier.fillMaxSize(),
+        color = MaterialTheme.colors.background
+    ) {
+        Content(onLogInClick)
+    }
+}
+
+@ExperimentalComposeUiApi
+@Composable
+private fun Content(
+    onLogInClick: () -> Unit
+) {
     val passwordFocusRequester = FocusRequester()
 
-    Surface(color = MaterialTheme.colors.background) {
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(start = 16.dp, end = 16.dp),
-            verticalArrangement = Arrangement.Center,
-        ) {
-            Title(Modifier.align(Alignment.CenterHorizontally))
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(start = 16.dp, end = 16.dp),
+        verticalArrangement = Arrangement.Center,
+    ) {
+        Title(Modifier.align(Alignment.CenterHorizontally))
 
-            Spacer(Modifier.height(16.dp))
+        Spacer(Modifier.height(16.dp))
 
-            EmailTextField(passwordFocusRequester)
+        EmailTextField(passwordFocusRequester)
 
-            Spacer(Modifier.height(8.dp))
+        Spacer(Modifier.height(8.dp))
 
-            PasswordTextField(passwordFocusRequester)
+        PasswordTextField(passwordFocusRequester)
 
-            Spacer(Modifier.height(16.dp))
+        Spacer(Modifier.height(16.dp))
 
-            LogInAgreementText()
+        LogInAgreementText()
 
-            Spacer(Modifier.height(16.dp))
+        Spacer(Modifier.height(16.dp))
 
-            CreateAccountButton(onLogInClick)
-        }
+        CreateAccountButton(onLogInClick)
     }
 }
 
@@ -76,7 +88,7 @@ fun LogInScreen(onLogInClick: () -> Unit) {
 private fun Title(modifier: Modifier = Modifier) {
     Text(
         modifier = modifier,
-        text = stringResource(id = R.string.log_in_title_text),
+        text = stringResource(R.string.log_in_title_text),
         style = MaterialTheme.typography.h1,
         color = MaterialTheme.colors.onPrimary,
     )
@@ -92,10 +104,11 @@ private fun EmailTextField(passwordFocusRequester: FocusRequester) {
         onValueChange = { email = it },
         textStyle = MaterialTheme.typography.body1,
         colors = TextFieldDefaults.outlinedTextFieldColors(
+            cursorColor = MaterialTheme.colors.onPrimary,
             textColor = MaterialTheme.colors.onPrimary,
         ),
         maxLines = 1,
-        label = { Text(
+        placeholder = { Text(
             text = stringResource(R.string.log_in_email_hint),
             color = MaterialTheme.colors.onSurface) },
         keyboardOptions = KeyboardOptions(
@@ -122,10 +135,11 @@ private fun PasswordTextField(focusRequester: FocusRequester) {
         onValueChange = { password = it },
         textStyle = MaterialTheme.typography.body1,
         colors = TextFieldDefaults.outlinedTextFieldColors(
+            cursorColor = MaterialTheme.colors.onPrimary,
             textColor = MaterialTheme.colors.onPrimary,
         ),
         maxLines = 1,
-        label = { Text(
+        placeholder = { Text(
             text = stringResource(R.string.log_in_password_hint),
             color = MaterialTheme.colors.onSurface) },
         visualTransformation = PasswordVisualTransformation(),
@@ -156,10 +170,10 @@ private fun LogInAgreementText() {
 
 @Composable
 private fun getLogInAgreementText() = buildAnnotatedString {
-    val logInTermsOfUseText = stringResource(id = R.string.log_in_terms_of_use_text)
+    val logInTermsOfUseText = stringResource(R.string.log_in_terms_of_use_text)
 
     val (termsOfUseStartIndex, termsOfUseEndIndex) =
-        logInTermsOfUseText.indexOfStartEnd(stringResource(id = R.string.terms_of_use))
+        logInTermsOfUseText.indexOfStartEnd(stringResource(R.string.terms_of_use))
 
     val (privacyPolicyStartIndex, privacyPolicyEndIndex) =
         logInTermsOfUseText.indexOfStartEnd(stringResource(R.string.privacy_policy))
@@ -185,7 +199,7 @@ private fun AnnotatedString.Builder.addUnderlineStyle(start: Int, end: Int) {
 @Composable
 private fun CreateAccountButton(onLogInClick: () -> Unit) {
     SimpleButton(
-        text = stringResource(id = R.string.log_in),
+        text = stringResource(R.string.log_in),
         onClick = onLogInClick
     )
 }
